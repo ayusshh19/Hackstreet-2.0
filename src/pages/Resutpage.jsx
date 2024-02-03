@@ -81,14 +81,14 @@ function Resutpage(props) {
                 if (index < temp && prevchat.length > 0) {
                   return (
                     <div className=" flex flex-col mb-10 justify-start h-auto items-start">
-                      <h1 className="text-xl sm:text-3xl h-10 mb-3 sm:mb-0 text-fillcomp font-semibold">
+                      <h1 className="text-xl sm:text-3xl h-auto mb-3 sm:mb-0 text-fillcomp font-semibold">
                         {data.user_response}
                       </h1>
                       <p
                         className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line  w-full"
-                        onClick={() =>
-                          copyToClipboard(chatdata[0]?.ai_response)
-                        }
+                        // onClick={() =>
+                        //   copyToClipboard(chatdata[0]?.ai_response)
+                        // }
                       >
                         {data.ai_response}
                       </p>
@@ -110,6 +110,7 @@ function Resutpage(props) {
                   name="hs-trailing-button-add-on-with-icon"
                   placeholder="Example : “Why to become webdeveloper”"
                   onChange={(e) => setusersearch(e.target.value)}
+                  value={usersearch}
                   class="py-3 px-4 block w-full border-gray-200 shadow-sm rounded-s-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 bg-gradient-to-r from-graytext opacity-50 to-darkbg"
                 />
                 <button

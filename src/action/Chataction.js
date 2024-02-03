@@ -69,7 +69,7 @@ export const titleTransfer = (title, currentid) => async (dispatch) => {
 
 export const sendchat = (userprompt, currentid) => async (dispatch) => {
   try {
-    dispatch({ type: CHAT_REQUEST });
+    // dispatch({ type: CHAT_REQUEST });
     const token = localStorage.getItem("token");
 
     let url;

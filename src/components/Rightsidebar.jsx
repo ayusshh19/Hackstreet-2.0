@@ -7,6 +7,7 @@ import {
 } from "../action/Chataction";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
+import { CHAT_REQUEST } from "../constants/Chatconstant";
 
 function Rightsidebar({ handlerightside, sethandlerightside }) {
   const alert = useAlert();
@@ -16,6 +17,8 @@ function Rightsidebar({ handlerightside, sethandlerightside }) {
   const { currentid } = useSelector((state) => state.chat);
 
   const titletransferhandle = (title) => {
+    dispatch({type:CHAT_REQUEST})
+    localStorage.removeItem("handletitle")
     dispatch(titleTransfer(title, currentid));
     navigate("/result");
   };
