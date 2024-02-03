@@ -73,17 +73,23 @@ function Resutpage(props) {
             />
           </svg>
         </div>
-        <div className="flex flex-col w-full h-9/10 sm:h-full justify-start  relative items-center overflow-auto  mt-8 sm:mt-0">
+        <div className="flex flex-col w-full h-9/10 sm:h-full justify-start  relative  overflow-auto  mt-8 sm:mt-0">
           <div className="h-4/5 flex flex-col overflow-auto p-5">
             {prevchat &&
               prevchat.map((data, index) => {
-                if (index < prevchat.length - 1 && prevchat.length >0) {
+                const temp = chatdata ? prevchat.length - 1 : prevchat.length;
+                if (index < temp && prevchat.length > 0) {
                   return (
                     <div className=" flex flex-col mb-10 justify-start h-auto items-start">
                       <h1 className="text-xl sm:text-3xl h-10 mb-3 sm:mb-0 text-fillcomp font-semibold">
                         {data.user_response}
                       </h1>
-                      <p className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line  w-full" onClick={()=>copyToClipboard(chatdata[0]?.ai_response)}>
+                      <p
+                        className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line  w-full"
+                        onClick={() =>
+                          copyToClipboard(chatdata[0]?.ai_response)
+                        }
+                      >
                         {data.ai_response}
                       </p>
                     </div>
@@ -92,7 +98,7 @@ function Resutpage(props) {
               })}
             <Responsivetext />
           </div>
-          <div className=" absolute w-full bottom-4  sm:w-4/5">
+          <div className=" absolute w-full bottom-4 sm:left-[10%]  m-auto sm:w-4/5">
             <div className="w-full">
               <label for="hs-trailing-button-add-on-with-icon" class="sr-only">
                 Label
