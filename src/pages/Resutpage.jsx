@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { innerchat, sendchat } from "../action/Chataction";
 import { useAlert } from "react-alert";
 import { CHAT_REQUEST } from "../constants/Chatconstant";
+import Responsivetext from "../components/Responsivetext";
 
 function Resutpage(props) {
   const copyToClipboard = (text) => {
@@ -31,8 +32,7 @@ function Resutpage(props) {
   const { loading, chatdata, currentid, prevchat } = useSelector(
     (state) => state.chat
   );
-  const data = useSelector((state) => state);
-  console.log(data);
+  console.log(prevchat)
   const handlesubmit = () => {
     if (usersearch.length > 0) {
       dispatch(sendchat(usersearch, currentid));
@@ -90,17 +90,7 @@ function Resutpage(props) {
                   );
                 }
               })}
-            {chatdata!=null &&chatdata && (
-              <div className=" flex flex-col justify-start relative h-auto items-start">
-
-                <h1 className="text-xl sm:text-3xl sm:mb-0 mb-3 h-10 text-fillcomp font-semibold">
-                  {chatdata[0]?.user_response}
-                </h1>
-                <p className="text-sm h-4/5 sm:h-5/6 relative whitespace-pre-line w-full" onClick={()=>copyToClipboard(chatdata[0]?.ai_response)}>
-                  {chatdata[0]?.ai_response}
-                </p> 
-              </div>
-            )}
+            <Responsivetext />
           </div>
           <div className=" absolute w-full bottom-4  sm:w-4/5">
             <div className="w-full">

@@ -28,7 +28,6 @@ export const Chatreducer = (
         chatdata: action.payload,
       };
     case HANDLE_TTILES:
-      console.log(action)
       return {
         ...state,
         prevchat:action.payload,

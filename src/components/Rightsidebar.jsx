@@ -13,23 +13,25 @@ function Rightsidebar({ handlerightside, sethandlerightside }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, chatdata, error } = useSelector((state) => state.title);
-  console.log(chatdata)
   const { currentid } = useSelector((state) => state.chat);
+
   const titletransferhandle = (title) => {
-    dispatch(titleTransfer(title,currentid));
+    dispatch(titleTransfer(title, currentid));
     navigate("/result");
   };
+
   const handledeletetitle = (title) => {
     dispatch(deletechattitle(title, currentid));
     dispatch(getchatitle(currentid));
     navigate("/mainpage");
   };
+
   useEffect(() => {
+    console.log(currentid)
+    dispatch(getchatitle(currentid));
     if (error) {
       alert.error(error);
     }
-    console.log(currentid);
-    dispatch(getchatitle(currentid));
   }, []);
   return (
     <div
@@ -85,11 +87,14 @@ function Rightsidebar({ handlerightside, sethandlerightside }) {
           <div>
             {loading
               ? "loading"
-              : Array.isArray(chatdata)&&
+              : Array.isArray(chatdata) &&
                 chatdata.map((data) => {
                   return (
                     <>
-                      <div className="flex w-full justify-between items-center cursor-pointer px-2 py-2 text-white" key={data.id}>
+                      <div
+                        className="flex w-full justify-between items-center cursor-pointer px-2 py-2 text-white"
+                        key={data.id}
+                      >
                         <div onClick={() => titletransferhandle(data.title)}>
                           <h1>{data.title}</h1>
                           <p className=" text-xs text-graytext">Today</p>

@@ -45,7 +45,7 @@ const get_latest_title = (currentid) => {
     });
 };
 
-export const titleTransfer = (title,currentid) => async (dispatch) => {
+export const titleTransfer = (title, currentid) => async (dispatch) => {
   try {
     console.log(title);
     const token = localStorage.getItem("token")
@@ -59,7 +59,7 @@ export const titleTransfer = (title,currentid) => async (dispatch) => {
           "ngrok-skip-browser-warning": "any",
         },
       })
-    console.log("kuch print karo ",data)
+    console.log("kuch print karo ", data)
     dispatch({ type: HANDLE_TTILES, payload: data })
   } catch (error) {
     console.log(error)
@@ -92,25 +92,6 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
       body: localStorage.getItem("handletitle") ? JSON.stringify({ prompt: userprompt, title: localStorage.getItem("handletitle") }) : JSON.stringify({ prompt: userprompt })
     });
 
-
-    var temp = await get_latest_title(currentid);
-    console.log(temp)
-    localStorage.setItem("handletitle", temp)
-    const urldata = BASE_URL + `/get_data/${currentid}/`;
-    const { data } = await axios.post(urldata,
-      { title: temp },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          "ngrok-skip-browser-warning": "any",
-        },
-      })
-    dispatch({ type: HANDLE_TTILES, payload: data })
-
-
-    
-
     let finalstring = " "
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
@@ -126,15 +107,25 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
       finalstring += decodedValue
       // console.log(finalstring)
       dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
+
     }
-    console.log("response",response)
-    finalstring=format(finalstring);
-    dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
-
-
-
-    
-
+    var temp = await get_latest_title(currentid);
+      console.log(temp)
+      localStorage.setItem("handletitle", temp)
+      const urldata = BASE_URL + `/get_data/${currentid}/`;
+      const { data } = await axios.post(urldata,
+        { title: temp },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "any",
+          },
+        })
+      dispatch({ type: HANDLE_TTILES, payload: data })
+    console.log("response", response)
+    // finalstring = format(finalstring);
+    // dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
 
   } catch (error) {
     console.log(error)
@@ -205,14 +196,14 @@ export const getchatitle = (currentid) => async (dispatch) => {
     const token = localStorage.getItem("token");
     console.log("current", currentid)
     const config = {
-       headers: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
         "ngrok-skip-browser-warning": "any",
       },
     };
-    const  {data}  = await axios.get(
-      `${BASE_URL}/get_titles/${currentid}`,
+    const { data } = await axios.get(
+      `${BASE_URL}/get_titles/${currentid}/`,
       config
     );
     console.log("title data", data)
