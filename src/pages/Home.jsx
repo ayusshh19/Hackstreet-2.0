@@ -228,8 +228,8 @@ const Homepage = () => {
             <p className="sr-only">SiteGPT</p>
           </a>
 
-          <p className="text-sm leading-5 text-gray-500 mt-8 text-center">
-            urgpt@gmail.com
+          <p className="text-xl leading-5 text-gray-500 mt-8 text-center">
+            by Team Humaniods
           </p>
         </div>
       </footer>
