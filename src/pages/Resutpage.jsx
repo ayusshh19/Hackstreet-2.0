@@ -73,7 +73,7 @@ function Resutpage(props) {
             />
           </svg>
         </div>
-        <div className="flex flex-col w-full h-9/10 sm:h-full justify-start  relative items-center overflow-auto  mt-8 sm:mt-0">
+        <div className="flex flex-col w-full h-9/10 sm:h-full justify-start  relative  overflow-auto  mt-8 sm:mt-0">
           <div className="h-4/5 flex flex-col overflow-auto p-5">
             {prevchat &&
               prevchat.map((data, index) => {
@@ -90,7 +90,7 @@ function Resutpage(props) {
                   );
                 }
               })}
-            {chatdata!=null &&chatdata && (
+            {chatdata!=null && chatdata && (
               <div className=" flex flex-col justify-start relative h-auto items-start">
 
                 <h1 className="text-xl sm:text-3xl sm:mb-0 mb-3 h-10 text-fillcomp font-semibold">
@@ -102,7 +102,7 @@ function Resutpage(props) {
               </div>
             )}
           </div>
-          <div className=" absolute w-full bottom-4  sm:w-4/5">
+          <div className=" absolute w-full bottom-4 sm:left-[10%]  m-auto sm:w-4/5">
             <div className="w-full">
               <label for="hs-trailing-button-add-on-with-icon" class="sr-only">
                 Label
