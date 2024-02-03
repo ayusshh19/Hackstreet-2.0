@@ -11,6 +11,7 @@ function Leftsidebar({ handleleftside, sethandleleftside }) {
   const logout = () =>{
     localStorage.removeItem("token")
     localStorage.removeItem("handletitle")
+    localStorage.removeItem("username")
     dispatch({type:LOGOUT_SUCCESS})
     navigate("/login")
   }
