@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CHAT_REQUEST, NEW_CHAT_ID } from "../constants/Chatconstant";
+import { LOGOUT_SUCCESS } from "../constants/Userconstants";
 
 function Leftsidebar({ handleleftside, sethandleleftside }) {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function Leftsidebar({ handleleftside, sethandleleftside }) {
   const logout = () =>{
     localStorage.removeItem("token")
     localStorage.removeItem("handletitle")
+    dispatch({type:LOGOUT_SUCCESS})
     navigate("/login")
   }
   const handlemainpage = ()=>{
