@@ -92,26 +92,6 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
       body: localStorage.getItem("handletitle") ? JSON.stringify({ prompt: userprompt, title: localStorage.getItem("handletitle") }) : JSON.stringify({ prompt: userprompt })
     });
 
-    let finalstring = " "
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        break;
-      }
-
-      const decodedValue = decoder.decode(value);
-      finalstring += decodedValue
-      console.log(finalstring)
-      dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
-    }
-    finalstring=format(finalstring);
-    dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
-
-
 
     var temp = await get_latest_title(currentid);
     console.log(temp)
@@ -128,6 +108,32 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
       })
     dispatch({ type: HANDLE_TTILES, payload: data })
 
+
+    
+
+    let finalstring = " "
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+
+      const decodedValue = decoder.decode(value);
+      finalstring += decodedValue
+      // console.log(finalstring)
+      dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
+    }
+    console.log("response",response)
+    finalstring=format(finalstring);
+    dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
+
+
+
+    
 
 
   } catch (error) {
