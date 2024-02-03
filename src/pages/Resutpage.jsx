@@ -77,28 +77,36 @@ function Resutpage(props) {
           <div className="h-4/5 flex flex-col overflow-auto p-5">
             {prevchat &&
               prevchat.map((data, index) => {
-                if (index < prevchat.length - 1 && prevchat.length >0) {
+                const temp = chatdata ? prevchat.length - 1 : prevchat.length;
+                if (index < temp && prevchat.length > 0) {
                   return (
                     <div className=" flex flex-col mb-10 justify-start h-auto items-start">
                       <h1 className="text-xl sm:text-3xl h-10 mb-3 sm:mb-0 text-fillcomp font-semibold">
                         {data.user_response}
                       </h1>
-                      <p className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line  w-full" onClick={()=>copyToClipboard(chatdata[0]?.ai_response)}>
+                      <p
+                        className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line  w-full"
+                        onClick={() =>
+                          copyToClipboard(chatdata[0]?.ai_response)
+                        }
+                      >
                         {data.ai_response}
                       </p>
                     </div>
                   );
                 }
               })}
-            {chatdata!=null && chatdata && (
+            {chatdata != null && chatdata && (
               <div className=" flex flex-col justify-start relative h-auto items-start">
-
                 <h1 className="text-xl sm:text-3xl sm:mb-0 mb-3 h-10 text-fillcomp font-semibold">
                   {chatdata[0]?.user_response}
                 </h1>
-                <p className="text-sm h-4/5 sm:h-5/6 relative whitespace-pre-line w-full" onClick={()=>copyToClipboard(chatdata[0]?.ai_response)}>
+                <p
+                  className="text-sm h-4/5 sm:h-5/6 relative whitespace-pre-line w-full"
+                  onClick={() => copyToClipboard(chatdata[0]?.ai_response)}
+                >
                   {chatdata[0]?.ai_response}
-                </p> 
+                </p>
               </div>
             )}
           </div>
