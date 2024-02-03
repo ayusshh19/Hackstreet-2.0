@@ -210,7 +210,7 @@ export const getchatitle = (currentid) => async (dispatch) => {
       config
     );
     console.log("title data", data)
-    dispatch({ type: TITLE_SUCCESS, payload: data });
+    dispatch({ type: TITLE_SUCCESS, payload: data.reverse() });
   } catch (error) {
     console.error(error.message)
     dispatch({ type: TITLE_FAIL, payload: error.message });
