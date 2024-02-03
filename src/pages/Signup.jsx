@@ -49,7 +49,7 @@ const Signup = () => {
         <div className="w-full p-8 lg:w-1/2">
           <p className="text-gray-600 text-xl font-bold">UrGPT</p>
           <p className="text-gray-600 my-4 text-4xl font-bold text-white">
-            Sign in
+            Sign up
           </p>
           <div className="mt-4">
             <label className="block text-gray-700 text-sm font-semibold mb-2">
@@ -181,7 +181,7 @@ const Signup = () => {
             <div className="w-2/3 h-1/3 bg-white m-auto rounded-lg flex">
               <div className="w-3/5 p-4 flex flex-col justify-center  gap-5">
                 <h1 className="text-fillcomp text-xl font-bold">
-                  Play with PDF to learn in efficient way
+                  Explore the Web with fingure tips
                 </h1>
                 <span className="bg-fillcomp w-4/5 text-center p-2 rounded-3xl">
                   Learn More
@@ -189,17 +189,17 @@ const Signup = () => {
               </div>
               <div className="w-2/5 flex justify-center items-center">
                 <img
-                  src="https://play-lh.googleusercontent.com/C33HqYgilwnqGsoPlEh_WzAlZIF2YrAkkdef_YEsILWbxGIG4UCzNTxF7iq9bzdxPw"
+                  src="https://icones.pro/wp-content/uploads/2021/04/icone-internet-grise.png"
                   alt=""
                   srcset=""
-                  className="w-full h-1/2"
+                  className="w-full h-1/2 pr-2"
                 />
               </div>
             </div>
             <div className="text-center h-1/3">
               <h1 className="text-2xl font-bold mb-4">Introducing new features</h1>
               <h4 className="text-sm">
-                New pdf question answering system with integretion<br></br> with Ai
+                Webpage question answering system with integretion<br></br> with Ai
                 kindly use and provide feedback
               </h4>
             </div>

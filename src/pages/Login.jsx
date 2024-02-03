@@ -176,7 +176,7 @@ const Login = () => {
         <div className="hidden md:block lg:w-1/2 bg-cover text-white bg-fillcomp">
           <div className="w-full h-full flex flex-col items-center my-4">
             <div>
-              <h1>Support</h1>
+              <h1 className="flex"><svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" className="mx-3">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="13" rx="2" width="4" height="6" />  <rect x="16" y="13" rx="2" width="4" height="6" />  <path d="M4 15v-3a8 8 0 0 1 16 0v3" />  <path d="M18 19a6 3 0 0 1 -6 3" /></svg>Support</h1>
             </div>
             <div className="w-2/3 h-1/3 bg-white m-auto rounded-lg flex">
               <div className="w-3/5 p-4 flex flex-col justify-center  gap-5">
