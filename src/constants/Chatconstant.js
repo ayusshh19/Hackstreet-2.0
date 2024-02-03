@@ -1,0 +1,21 @@
+export const CHAT_REQUEST = "CHAT_REQUEST";
+export const CHAT_SUCCESS = "CHAT_SUCCESS";
+export const CHAT_FAIL = "CHAT_FAIL";
+export const NEW_CHAT = "NEW_CHAT";
+export const NEW_CHAT_ID="NEW_CHAT_ID";
+export const HANDLE_TTILES="HANDLE_TTILES";
+export const CHAT_TITLE_SUCCESS = "CHAT_TITLE_SUCCESS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+export const TITLE_REQUEST = "TITLE_REQUEST";
+export const TITLE_SUCCESS = "TITLE_SUCCESS";
+export const TITLE_FAIL = "TITLE_FAIL";
+
+export const DELETE_TITLE_REQUEST = "DELETE_TITLE_REQUEST";
+export const DELETE_TITLE_SUCCESS = "DELETE_TITLE_SUCCESS";
+export const DELETE_TITLE_FAIL = "DELETE_TITLE_FAIL";
+
+export const LINK_REQUEST = "LINK_REQUEST";
+export const LINK_SUCCESS = "LINK_SUCCESS";
+export const LINK_FAIL = "LINK_FAIL";
+
