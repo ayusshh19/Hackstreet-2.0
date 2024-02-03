@@ -136,7 +136,7 @@ function Leftsidebar({ handleleftside, sethandleleftside }) {
       <div className="w-3/4 rounded-lg mx-auto my-10 flex justify-between shadow-lg bg-profilebg px-3 py-3 text-white ">
         <div className="w-3/4 flex flex-wrap break-words break-all">
           <h1>{user}</h1>
-          <p className="text-graytext text-xs">{user}</p>
+          {/* <p className="text-graytext text-xs">{user}</p> */}
         </div>
         <div className=" bg-fillcomp rounded-md font-semibold w-12 p-3 flex justify-center items-center h-6">
           <p>Free</p>
