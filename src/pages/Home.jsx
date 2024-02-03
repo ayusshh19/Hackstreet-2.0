@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 const Homepage = () => {
-  const [baseurl ,setbaseurl] = useState("")
+  const [baseurl, setbaseurl] = useState("");
   return (
     <div className="bg-darkbg text-white">
       <div className="fixed z-30 w-full max-w-screen-md  shadow backdrop-blur-lg inset-x-0 top-0 mx-auto border border-gray-100 py-3 md:top-6 md:rounded-3xl lg:max-w-screen-lg">
@@ -72,18 +72,23 @@ const Homepage = () => {
               diverse datasets, ensuring swift and accurate responses to user
               queries for an enhanced interactive experience.
             </h2>
-            
+
             <div class="m-6">
               <input
                 type="text"
                 id="default-input"
                 class="[background:radial-gradient(300%_100%_at_50%_10%,#201F1F_40%,#22FF53_200%)] via-[#201F1F] to-[#201F1F] border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Enter Base Url her"
-                onChange={(e)=>setbaseurl(e.target.value)}
+                onChange={(e) => setbaseurl(e.target.value)}
               />
             </div>
             <div className="flex items-center justify-center gap-x-6 mt-10">
-              <Button icon={true} buttonStyle="px-4 py-3" label={"Try Now"} baseurl={baseurl} />
+              <Button
+                icon={true}
+                buttonStyle="px-4 py-3"
+                label={"Try Now"}
+                baseurl={baseurl}
+              />
             </div>
           </div>
         </div>
@@ -222,49 +227,7 @@ const Homepage = () => {
             <div className="text-2xl text-white font-bold">UrGPT</div>
             <p className="sr-only">SiteGPT</p>
           </a>
-          <nav
-            className=" sm:columns-2 -mb-6 mt-8 flex flex-wrap sm:flex-nowrap gap-3 sm:gap-0 justify-center sm:space-x-8"
-            aria-label="Footer"
-          >
-            <div className="pb-6">
-              <span className="cursor-pointer text-sm font-medium leading-6 text-gray-600 transition-all duration-150 hover:text-[#20B2AA hover:underline">
-                Try Now
-              </span>
-            </div>
-            <div className="pb-6">
-              <span className="cursor-pointer text-sm font-medium leading-6 text-gray-600 transition-all duration-150 hover:text-[#20B2AA hover:underline">
-                API
-              </span>
-            </div>
-            <div className="pb-6">
-              <span className="cursor-pointer text-sm font-medium leading-6 text-gray-600 transition-all duration-150 hover:text-[#20B2AA hover:underline">
-                Contact us
-              </span>
-            </div>
-            <div className="pb-6">
-              <span className="cursor-pointer text-sm font-medium leading-6 text-gray-600 transition-all duration-150 hover:text-[#20B2AA hover:underline">
-                Terms &amp; Conditions
-              </span>
-            </div>
-          </nav>
-          <div className="flex justify-center mt-8">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://twitter.com/infynno"
-              className="isomorphic-link isomorphic-link--external inline-flex items-center justify-center gap-1.5 bg-darkbg text-sm font-medium text-gray-500 transition-all duration-150 rounded-xl border border-gray-200 px-3 py-2 hover:bg-blue-50 hover:text-filcomp hover:border-filcomp"
-            >
-              <svg
-                className="h-4 w-4"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-              </svg>
-              <span className="text-sm font-medium">Follow us on Twitter</span>
-            </a>
-          </div>
+
           <p className="text-sm leading-5 text-gray-500 mt-8 text-center">
             urgpt@gmail.com
           </p>
