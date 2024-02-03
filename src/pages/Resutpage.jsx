@@ -6,18 +6,20 @@ import { innerchat, sendchat } from "../action/Chataction";
 import { useAlert } from "react-alert";
 import { CHAT_REQUEST } from "../constants/Chatconstant";
 import Responsivetext from "../components/Responsivetext";
+import { useRef } from "react";
 
 function Resutpage(props) {
-  const copyToClipboard = (text) => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        console.log("Text copied to clipboard:", text);
-      })
-      .catch((error) => {
-        console.error("Unable to copy text to clipboard:", error);
-      });
-  };
+  // const copyToClipboard = (text) => {
+  //   navigator.clipboard
+  //     .writeText(text)
+  //     .then(() => {
+  //       console.log("Text copied to clipboard:", text);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Unable to copy text to clipboard:", error);
+  //     });
+  // };
+  const rName = useRef(null);
   const [usersearch, setusersearch] = useState("");
   const dispatch = useDispatch();
   const {
@@ -32,8 +34,11 @@ function Resutpage(props) {
   const { loading, chatdata, currentid, prevchat } = useSelector(
     (state) => state.chat
   );
-  console.log(prevchat)
   const handlesubmit = () => {
+    rName.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end"
+    })
     if (usersearch.length > 0) {
       dispatch(sendchat(usersearch, currentid));
       sethandlesearch("");
@@ -42,10 +47,8 @@ function Resutpage(props) {
       alert.error("Invalid search prompt!");
     }
   };
-  // useEffect(()=>{
-  //   console.log(data)
-  //   console.log("prev",prevchat);
-  // },[prevchat,chatdata])
+
+
   return (
     <div className="bg-white [background:radial-gradient(300%_175%_at_50%_10%,#201F1F_40%,#22FF53_200%)] via-[#201F1F] to-[#201F1F] flex w-full h-screen relative">
       <Leftsidebar
@@ -96,7 +99,12 @@ function Resutpage(props) {
                   );
                 }
               })}
-            <Responsivetext />
+            <div >
+              <Responsivetext />
+            </div>
+            <div ref={rName}>
+
+            </div>
           </div>
           <div className=" absolute w-full bottom-4 sm:left-[10%]  m-auto sm:w-4/5">
             <div className="w-full">

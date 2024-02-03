@@ -21,7 +21,6 @@ export const Chatreducer = (
   switch (action.type) {
     case CHAT_SUCCESS:
     case DELETE_TITLE_SUCCESS:
-      console.log("sadad")
       return {
         ...state,
         loading: false,
