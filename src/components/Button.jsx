@@ -4,7 +4,7 @@ function Button  ({ icon, label, buttonStyle,baseurl }) {
     const navigate = useNavigate()
     const Usersignup= ()=>{
         localStorage.setItem("BaseUrl",baseurl)
-        navigate("/signup")
+        navigate("/login")
     }
   return (
     <button
