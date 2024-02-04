@@ -112,7 +112,7 @@ function Resutpage(props) {
                         {data.user_response}
                       </h1>
                       <p
-                        className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line  w-full"
+                        className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line break-all  w-full"
                         // onClick={() =>
                         //   copyToClipboard(chatdata[0]?.ai_response)
                         // }
