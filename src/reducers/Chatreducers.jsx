@@ -46,9 +46,11 @@ export const Chatreducer = (
         error: action.payload.error,
       };
     case NEW_CHAT:
+      console.log("newchat handle",action.payload)
+      console.log(state)
       return {
         ...state,
-        newchat: false,
+        prevchat:[...state.prevchat,...action.payload],
       };
       case NEW_CHAT_ID:
         return {

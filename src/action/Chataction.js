@@ -10,7 +10,10 @@ function format(data) {
     codeRegex,
     (_, code) => `<pre>${code}</pre>`
   )
-  return formattedResponse
+  const replacedText = formattedResponse.replace(/\*\*(.*?)\*\*/g,(_,data)=> `<h1>${data}</h1>`);
+
+  console.log(replacedText);
+  return replacedText
 }
 
 const get_latest_title = (currentid) => {
@@ -110,22 +113,22 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
 
     }
     var temp = await get_latest_title(currentid);
-      console.log(temp)
-      localStorage.setItem("handletitle", temp)
-      const urldata = BASE_URL + `/get_data/${currentid}/`;
-      const { data } = await axios.post(urldata,
-        { title: temp },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-            "ngrok-skip-browser-warning": "any",
-          },
-        })
-      dispatch({ type: HANDLE_TTILES, payload: data })
+    console.log(temp)
+    localStorage.setItem("handletitle", temp)
+    const urldata = BASE_URL + `/get_data/${currentid}/`;
+    const { data } = await axios.post(urldata,
+      { title: temp },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "ngrok-skip-browser-warning": "any",
+        },
+      })
+    dispatch({ type: HANDLE_TTILES, payload: data })
     console.log("response", response)
-    // finalstring = format(finalstring);
-    // dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
+    finalstring = format(finalstring);
+    dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
 
   } catch (error) {
     console.log(error)

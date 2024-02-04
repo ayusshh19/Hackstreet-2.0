@@ -4,7 +4,7 @@ import Leftsidebar from "../components/Leftsidebar";
 import Rightsidebar from "../components/Rightsidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getchatitle, sendchat } from "../action/Chataction";
-import { NEW_CHAT_ID } from "../constants/Chatconstant";
+import { CHAT_REQUEST, NEW_CHAT_ID } from "../constants/Chatconstant";
 import { useAlert } from "react-alert";
 
 function Mainpage(props) {
@@ -25,6 +25,7 @@ function Mainpage(props) {
   const handlesubmit = () => {
     if (usersearch.length > 0) {
       localStorage.removeItem("handletitle")
+      dispatch({type:CHAT_REQUEST})
       dispatch(sendchat(usersearch, currentid));
       sethandlesearch(usersearch);
       navigate("/result");

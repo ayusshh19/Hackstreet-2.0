@@ -50,7 +50,7 @@ function Leftsidebar({ handleleftside, sethandleleftside }) {
         </div>
         <h1
           className="text-fillcomp text-2xl font-bold cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/mainpage")}
         >
           UrGPT
         </h1>

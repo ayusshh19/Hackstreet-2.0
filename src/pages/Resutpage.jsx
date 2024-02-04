@@ -4,7 +4,7 @@ import Rightsidebar from "../components/Rightsidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { innerchat, sendchat } from "../action/Chataction";
 import { useAlert } from "react-alert";
-import { CHAT_REQUEST } from "../constants/Chatconstant";
+import { CHAT_REQUEST, NEW_CHAT } from "../constants/Chatconstant";
 import Responsivetext from "../components/Responsivetext";
 import { useRef } from "react";
 
@@ -37,9 +37,10 @@ function Resutpage(props) {
   const handlesubmit = () => {
     rName.current.scrollIntoView({
       behavior: "smooth",
-      block: "end"
+      block: "start"
     })
     if (usersearch.length > 0) {
+      dispatch({type:NEW_CHAT,payload:chatdata})
       dispatch(sendchat(usersearch, currentid));
       sethandlesearch("");
       // navigate("/result");
@@ -47,7 +48,12 @@ function Resutpage(props) {
       alert.error("Invalid search prompt!");
     }
   };
-
+  useEffect(()=>{
+    rName.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    })
+  },[chatdata])
 
   return (
     <div className="bg-white [background:radial-gradient(300%_175%_at_50%_10%,#201F1F_40%,#22FF53_200%)] via-[#201F1F] to-[#201F1F] flex w-full h-screen relative">
@@ -80,7 +86,7 @@ function Resutpage(props) {
           <div className="h-4/5 flex flex-col overflow-auto p-5">
             {prevchat &&
               prevchat.map((data, index) => {
-                const temp = chatdata ? prevchat.length - 1 : prevchat.length;
+                const temp = chatdata ? prevchat.length - 1 : prevchat.length-1;
                 if (index < temp && prevchat.length > 0) {
                   return (
                     <div className=" flex flex-col mb-10 justify-start h-auto items-start">
@@ -99,7 +105,7 @@ function Resutpage(props) {
                   );
                 }
               })}
-            <div >
+            <div className="mb-5">
               <Responsivetext />
             </div>
             <div ref={rName}>
