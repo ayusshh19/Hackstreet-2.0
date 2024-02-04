@@ -41,7 +41,7 @@ const Signup = () => {
   }, [dispatch, error, alert, isAuthenticated]);
   const navigate = useNavigate()
   const movetologin = ()=>{
-    navigate("/mainpage")
+    navigate("/login")
   }
   return (
     <div className="flex items-center justify-center h-screen w-full px-5 sm:px-0 [background:radial-gradient(300%_175%_at_50%_10%,#201F1F_40%,#22FF53_200%)] via-[#201F1F] to-[#201F1F]">

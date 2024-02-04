@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 const Homepage = () => {
-  const [baseurl, setbaseurl] = useState("");
+  const [baseurl, setbaseurl] = useState("https://c24b-34-132-74-177.ngrok-free.app");
   return (
     <div className="bg-darkbg text-white">
       <div className="fixed z-30 w-full max-w-screen-md  shadow backdrop-blur-lg inset-x-0 top-0 mx-auto border border-gray-100 py-3 md:top-6 md:rounded-3xl lg:max-w-screen-lg">
@@ -79,7 +79,7 @@ const Homepage = () => {
                 id="default-input"
                 class="[background:radial-gradient(300%_100%_at_50%_10%,#201F1F_40%,#22FF53_200%)] via-[#201F1F] to-[#201F1F] border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Enter Base Url her"
-                onChange={(e) => setbaseurl(e.target.value)}
+                // onChange={(e) => setbaseurl(e.target.value)}
               />
             </div>
             <div className="flex items-center justify-center gap-x-6 mt-10">
