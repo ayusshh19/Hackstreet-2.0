@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/Baseurl";
 import { CHAT_FAIL, CHAT_REQUEST, CHAT_SUCCESS, DELETE_TITLE_FAIL, DELETE_TITLE_REQUEST, DELETE_TITLE_SUCCESS, HANDLE_TTILES, LINK_FAIL, LINK_REQUEST, LINK_SUCCESS, TITLE_FAIL, TITLE_REQUEST, TITLE_SUCCESS } from "../constants/Chatconstant";
-import { useDispatch, useSelector } from "react-redux";
+
 
 function format(data) {
   const res = data
@@ -10,7 +10,7 @@ function format(data) {
     codeRegex,
     (_, code) => `<pre>${code}</pre>`
   )
-  const replacedText = formattedResponse.replace(/\*\*(.*?)\*\*/g,(_,data)=> `<h1>${data}</h1>`);
+  const replacedText = formattedResponse.replace(/\*\*(.*?)\*\*/g, (_, data) => `<h1>${data}</h1>`);
 
   console.log(replacedText);
   return replacedText
