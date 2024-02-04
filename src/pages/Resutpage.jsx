@@ -37,10 +37,10 @@ function Resutpage(props) {
   const handlesubmit = () => {
     rName.current.scrollIntoView({
       behavior: "smooth",
-      block: "start"
-    })
+      block: "start",
+    });
     if (usersearch.length > 0) {
-      dispatch({type:NEW_CHAT,payload:chatdata})
+      dispatch({ type: NEW_CHAT, payload: chatdata });
       dispatch(sendchat(usersearch, currentid));
       sethandlesearch("");
       // navigate("/result");
@@ -48,12 +48,12 @@ function Resutpage(props) {
       alert.error("Invalid search prompt!");
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     rName.current.scrollIntoView({
       behavior: "smooth",
-      block: "start"
-    })
-  },[chatdata])
+      block: "start",
+    });
+  }, [chatdata]);
 
   return (
     <div className="bg-white [background:radial-gradient(300%_175%_at_50%_10%,#201F1F_40%,#22FF53_200%)] via-[#201F1F] to-[#201F1F] flex w-full h-screen relative">
@@ -86,7 +86,7 @@ function Resutpage(props) {
           <div className="h-4/5 flex flex-col overflow-auto p-5">
             {prevchat &&
               prevchat.map((data, index) => {
-                const temp = chatdata ? prevchat.length - 1 : prevchat.length-1;
+                const temp = chatdata ? prevchat.length - 1 : prevchat.length;
                 if (index < temp && prevchat.length > 0) {
                   return (
                     <div className=" flex flex-col mb-10 justify-start h-auto items-start">
@@ -98,6 +98,7 @@ function Resutpage(props) {
                         // onClick={() =>
                         //   copyToClipboard(chatdata[0]?.ai_response)
                         // }
+                        // dangerouslySetInnerHTML={{ __html: data.ai_response }}
                       >
                         {data.ai_response}
                       </p>
@@ -108,9 +109,7 @@ function Resutpage(props) {
             <div className="mb-5">
               <Responsivetext />
             </div>
-            <div ref={rName}>
-
-            </div>
+            <div ref={rName}></div>
           </div>
           <div className=" absolute w-full bottom-4 sm:left-[10%]  m-auto sm:w-4/5">
             <div className="w-full">
