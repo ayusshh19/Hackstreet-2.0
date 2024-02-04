@@ -7,7 +7,7 @@ import { useAlert } from "react-alert";
 import { CHAT_REQUEST, NEW_CHAT } from "../constants/Chatconstant";
 import Responsivetext from "../components/Responsivetext";
 import { useRef } from "react";
-
+import './result.css'
 function Resutpage(props) {
   // const copyToClipboard = (text) => {
   //   navigator.clipboard
@@ -31,6 +31,25 @@ function Resutpage(props) {
     handlesearch,
   } = props.value;
   const alert = useAlert();
+
+
+  function format(data) {
+    const res = data;
+    const codeRegex = /```([\s\S]*?)```/g;
+    const formattedResponse = res.replace(
+      codeRegex,
+      (_, code) => `<pre>${code}</pre>`
+    );
+    const replacedText = formattedResponse.replace(
+      /\*\*(.*?)\*\*/g,
+      (_, data) => `<h1>${data}</h1>`
+    );
+  
+    console.log(replacedText);
+    return replacedText;
+  }
+
+
   const { loading, chatdata, currentid, prevchat } = useSelector(
     (state) => state.chat
   );
@@ -90,7 +109,7 @@ function Resutpage(props) {
                 if (index < temp && prevchat.length > 0) {
                   return (
                     <div className=" flex flex-col mb-10 justify-start h-auto items-start">
-                      <h1 className="text-xl sm:text-3xl h-auto mb-3 sm:mb-0 text-fillcomp font-semibold">
+                      <h1 className="text-xl sm:text-3xl h-auto mb-3 sm:mb-3 text-fillcomp font-semibold">
                         {data.user_response}
                       </h1>
                       <p
@@ -98,9 +117,9 @@ function Resutpage(props) {
                         // onClick={() =>
                         //   copyToClipboard(chatdata[0]?.ai_response)
                         // }
-                        // dangerouslySetInnerHTML={{ __html: data.ai_response }}
+                        dangerouslySetInnerHTML={{ __html: format(data.ai_response) }}
                       >
-                        {data.ai_response}
+                        {/* {data.ai_response} */}
                       </p>
                     </div>
                   );
