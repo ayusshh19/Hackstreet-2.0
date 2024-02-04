@@ -15,14 +15,13 @@ import {
   TITLE_REQUEST,
   TITLE_SUCCESS,
 } from "../constants/Chatconstant";
-import { useDispatch, useSelector } from "react-redux";
 
 function format(data) {
   const res = data;
   const codeRegex = /```([\s\S]*?)```/g;
   const formattedResponse = res.replace(
     codeRegex,
-    (_, code) => `<pre className="p-4 b-2">${code}</pre>`
+    (_, code) => `<pre className="p-4 border-2 shadow-xl border-solid">${code}</pre>`
   );
   const replacedText = formattedResponse.replace(
     /\*\*(.*?)\*\*/g,
@@ -139,8 +138,7 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
       });
     }
     var temp = await get_latest_title(currentid);
-    console.log(temp);
-    localStorage.setItem("handletitle", temp);
+    localStorage.setItem("handletitle", temp)
     const urldata = BASE_URL + `/get_data/${currentid}/`;
     const { data } = await axios.post(
       urldata,
