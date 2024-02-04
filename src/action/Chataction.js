@@ -24,15 +24,15 @@ function format(data) {
     (_, code) =>
       `<pre className="p-4 border-2 shadow-xl border-solid">${code}</pre>`
   );
-  const replacedText = formattedResponse.replace(
-    /([\s\S]*?):/g,
-    // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
-    (_, data) => `<h6>${data}:</h6>`
-  );
+  // const replacedText = formattedResponse.replace(
+  //   /([\s\S]*?):/g,
+  //   // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
+  //   (_, data) => `<h6>${data}:</h6>`
+  // );
 
   // console.log(replacedText);
   // return replacedText;
-  const finalHTML = `<div>${replacedText}</div>`;
+  const finalHTML = `<div>${formattedResponse}</div>`;
   console.log(finalHTML);
   return finalHTML;
 }

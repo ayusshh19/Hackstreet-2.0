@@ -39,14 +39,14 @@ function Resutpage(props) {
       codeRegex,
       (_, code) => `<pre>${code}</pre>`
     );
-    const replacedText = formattedResponse.replace(
-      /([\s\S]*?):/g,
-      // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
-      (_, data) => `<h6>${data}:</h6>`
-    );
+    // const replacedText = formattedResponse.replace(
+    //   /([\s\S]*?):/g,
+    //   // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
+    //   (_, data) => `<h6>${data}:</h6>`
+    // );
 
-    console.log(replacedText);
-    return replacedText;
+    console.log(formattedResponse);
+    return formattedResponse;
   }
 
   const { loading, chatdata, currentid, prevchat } = useSelector(

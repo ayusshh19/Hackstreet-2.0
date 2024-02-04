@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../constants/Baseurl";
 import { useDispatch } from "react-redux";
 import { CHAT_REQUEST, NEW_CHAT_ID } from "../constants/Chatconstant";
+import { useAlert } from "react-alert";
 
 function Playwithpdf() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const alert = useAlert()
   useEffect(()=>{
     dispatch({type:NEW_CHAT_ID,payload:2})
   },[])
@@ -29,6 +31,7 @@ function Playwithpdf() {
       if (response.ok) {
         const result = await response.json();
         dispatch({type:CHAT_REQUEST})
+        alert.success("Document uploaded successfully!")
         navigate("/mainpage")
       } else {
         console.error("Failed to upload PDFs:", response.statusText);

@@ -28,6 +28,7 @@ function Webpage(props) {
     if (usersearch.length > 0) {
       dispatch({type:CHAT_REQUEST})
       dispatch(weblinkhandle(usersearch));
+      alert.success("Website loaded successfully")
       navigate("/mainpage");
     } else {
       alert.error("Invalid Prompt input");
