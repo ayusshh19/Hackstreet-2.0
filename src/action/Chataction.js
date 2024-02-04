@@ -1,24 +1,40 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/Baseurl";
-import { CHAT_FAIL, CHAT_REQUEST, CHAT_SUCCESS, DELETE_TITLE_FAIL, DELETE_TITLE_REQUEST, DELETE_TITLE_SUCCESS, HANDLE_TTILES, LINK_FAIL, LINK_REQUEST, LINK_SUCCESS, TITLE_FAIL, TITLE_REQUEST, TITLE_SUCCESS } from "../constants/Chatconstant";
-
+import {
+  CHAT_FAIL,
+  CHAT_REQUEST,
+  CHAT_SUCCESS,
+  DELETE_TITLE_FAIL,
+  DELETE_TITLE_REQUEST,
+  DELETE_TITLE_SUCCESS,
+  HANDLE_TTILES,
+  LINK_FAIL,
+  LINK_REQUEST,
+  LINK_SUCCESS,
+  TITLE_FAIL,
+  TITLE_REQUEST,
+  TITLE_SUCCESS,
+} from "../constants/Chatconstant";
 
 function format(data) {
-  const res = data
-  const codeRegex = /```([\s\S]*?)```/g
+  const res = data;
+  const codeRegex = /```([\s\S]*?)```/g;
   const formattedResponse = res.replace(
     codeRegex,
-    (_, code) => `<pre>${code}</pre>`
-  )
-  const replacedText = formattedResponse.replace(/\*\*(.*?)\*\*/g, (_, data) => `<h1>${data}</h1>`);
+    (_, code) => `<pre className="p-4 b-2">${code}</pre>`
+  );
+  const replacedText = formattedResponse.replace(
+    /\*\*(.*?)\*\*/g,
+    (_, data) => `<h1>${data}</h1>`
+  );
 
   console.log(replacedText);
-  return replacedText
+  return replacedText;
 }
 
 const get_latest_title = (currentid) => {
   const url = BASE_URL + `/get_titles/${currentid}`;
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
   return fetch(url, {
     method: "GET",
@@ -51,9 +67,10 @@ const get_latest_title = (currentid) => {
 export const titleTransfer = (title, currentid) => async (dispatch) => {
   try {
     console.log(title);
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     const url = BASE_URL + `/get_data/${currentid}/`;
-    const { data } = await axios.post(url,
+    const { data } = await axios.post(
+      url,
       { title: title },
       {
         headers: {
@@ -61,11 +78,12 @@ export const titleTransfer = (title, currentid) => async (dispatch) => {
           Authorization: `Bearer ${token}`,
           "ngrok-skip-browser-warning": "any",
         },
-      })
-    console.log("kuch print karo ", data)
-    dispatch({ type: HANDLE_TTILES, payload: data })
+      }
+    );
+    console.log("kuch print karo ", data);
+    dispatch({ type: HANDLE_TTILES, payload: data });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({ type: CHAT_FAIL, payload: error.response });
   }
 };
@@ -77,13 +95,11 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
 
     let url;
     if (currentid === 1) {
-      url = `${BASE_URL}/chat/`
-    }
-    else if (currentid === 2) {
-      url = `${BASE_URL}/chat/docqna/`
-    }
-    else {
-      url = `${BASE_URL}/chat/webqna/`
+      url = `${BASE_URL}/chat/`;
+    } else if (currentid === 2) {
+      url = `${BASE_URL}/chat/docqna/`;
+    } else {
+      url = `${BASE_URL}/chat/webqna/`;
     }
     const response = await fetch(url, {
       method: "POST",
@@ -92,13 +108,17 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
         Authorization: `Bearer ${token}`,
         "ngrok-skip-browser-warning": "any",
       },
-      body: localStorage.getItem("handletitle") ? JSON.stringify({ prompt: userprompt, title: localStorage.getItem("handletitle") }) : JSON.stringify({ prompt: userprompt })
+      body: localStorage.getItem("handletitle")
+        ? JSON.stringify({
+            prompt: userprompt,
+            title: localStorage.getItem("handletitle"),
+          })
+        : JSON.stringify({ prompt: userprompt }),
     });
 
-    let finalstring = " "
+    let finalstring = " ";
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
-
 
     while (true) {
       const { done, value } = await reader.read();
@@ -107,15 +127,18 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
       }
 
       const decodedValue = decoder.decode(value);
-      finalstring += decodedValue
+      finalstring += decodedValue;
       // console.log(finalstring)
-      dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
-
+      dispatch({
+        type: CHAT_SUCCESS,
+        payload: [{ user_response: userprompt, ai_response: finalstring }],
+      });
     }
     var temp = await get_latest_title(currentid);
     localStorage.setItem("handletitle", temp)
     const urldata = BASE_URL + `/get_data/${currentid}/`;
-    const { data } = await axios.post(urldata,
+    const { data } = await axios.post(
+      urldata,
       { title: temp },
       {
         headers: {
@@ -123,19 +146,21 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
           Authorization: `Bearer ${token}`,
           "ngrok-skip-browser-warning": "any",
         },
-      })
-    dispatch({ type: HANDLE_TTILES, payload: data })
-    console.log("response", response)
+      }
+    );
+    dispatch({ type: HANDLE_TTILES, payload: data });
+    console.log("response", response);
+    
     finalstring = format(finalstring);
-    dispatch({ type: CHAT_SUCCESS, payload: [{ user_response: userprompt, ai_response: finalstring }] });
-
+    dispatch({
+      type: CHAT_SUCCESS,
+      payload: [{ user_response: userprompt, ai_response: finalstring }],
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({ type: CHAT_FAIL, payload: error.response });
   }
 };
-
-
 
 export const innerchat = (userprompt, currentid) => async (dispatch) => {
   try {
@@ -143,29 +168,24 @@ export const innerchat = (userprompt, currentid) => async (dispatch) => {
     const token = localStorage.getItem("token");
     let url;
     if (currentid === 1) {
-      url = `${BASE_URL}/chat`
-    }
-    else if (currentid === 2) {
-      url = `${BASE_URL}/chat/docqna`
-    }
-    else {
-      url = `${BASE_URL}/chat/webqna`
+      url = `${BASE_URL}/chat`;
+    } else if (currentid === 2) {
+      url = `${BASE_URL}/chat/docqna`;
+    } else {
+      url = `${BASE_URL}/chat/webqna`;
     }
 
-    const response = await fetch(url,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          "ngrok-skip-browser-warning": "any",
-        },
-        body: JSON.stringify({ prompt: userprompt, title: data[0].title }),
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "any",
+      },
+      body: JSON.stringify({ prompt: userprompt, title: data[0].title }),
+    });
 
-      });
-
-
-    let finalstring = " "
+    let finalstring = " ";
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
 
@@ -176,27 +196,22 @@ export const innerchat = (userprompt, currentid) => async (dispatch) => {
       }
 
       const decodedValue = decoder.decode(value);
-      finalstring += decodedValue
+      finalstring += decodedValue;
       dispatch({ type: CHAT_SUCCESS, payload: finalstring });
     }
-    let finaloutput = format(finalstring)
+    let finaloutput = format(finalstring);
     dispatch({ type: CHAT_SUCCESS, payload: finaloutput });
-
-
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({ type: CHAT_FAIL, payload: error.message });
   }
 };
-
-
 
 export const getchatitle = (currentid) => async (dispatch) => {
   try {
     dispatch({ type: TITLE_REQUEST });
     const token = localStorage.getItem("token");
-    console.log("current", currentid)
+    console.log("current", currentid);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -208,14 +223,13 @@ export const getchatitle = (currentid) => async (dispatch) => {
       `${BASE_URL}/get_titles/${currentid}/`,
       config
     );
-    console.log("title data", data)
+    console.log("title data", data);
     dispatch({ type: TITLE_SUCCESS, payload: data.reverse() });
   } catch (error) {
-    console.error(error.message)
+    console.error(error.message);
     dispatch({ type: TITLE_FAIL, payload: error.message });
   }
 };
-
 
 export const deletechattitle = (title, currentid) => async (dispatch) => {
   try {
@@ -237,11 +251,10 @@ export const deletechattitle = (title, currentid) => async (dispatch) => {
 
     dispatch({ type: DELETE_TITLE_SUCCESS, payload: data.data });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({ type: DELETE_TITLE_FAIL, payload: error.message });
   }
 };
-
 
 export const weblinkhandle = (userlink) => async (dispatch) => {
   try {
@@ -259,11 +272,11 @@ export const weblinkhandle = (userlink) => async (dispatch) => {
       { urls: [userlink] },
       config
     );
-    console.log(data)
+    console.log(data);
 
     dispatch({ type: LINK_SUCCESS, payload: data.data });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({ type: LINK_FAIL, payload: error.message });
   }
 };
