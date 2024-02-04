@@ -113,7 +113,6 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
 
     }
     var temp = await get_latest_title(currentid);
-    console.log(temp)
     localStorage.setItem("handletitle", temp)
     const urldata = BASE_URL + `/get_data/${currentid}/`;
     const { data } = await axios.post(urldata,
