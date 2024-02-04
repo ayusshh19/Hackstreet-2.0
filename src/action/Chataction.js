@@ -21,15 +21,20 @@ function format(data) {
   const codeRegex = /```([\s\S]*?)```/g;
   const formattedResponse = res.replace(
     codeRegex,
-    (_, code) => `<pre className="p-4 border-2 shadow-xl border-solid">${code}</pre>`
+    (_, code) =>
+      `<pre className="p-4 border-2 shadow-xl border-solid">${code}</pre>`
   );
   const replacedText = formattedResponse.replace(
-    /\*\*(.*?)\*\*/g,
-    (_, data) => `<h1>${data}</h1>`
+    /([\s\S]*?):/g,
+    // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
+    (_, data) => `<h6>${data}:</h6>`
   );
 
-  console.log(replacedText);
-  return replacedText;
+  // console.log(replacedText);
+  // return replacedText;
+  const finalHTML = `<div>${replacedText}</div>`;
+  console.log(finalHTML);
+  return finalHTML;
 }
 
 const get_latest_title = (currentid) => {
@@ -135,7 +140,7 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
       });
     }
     var temp = await get_latest_title(currentid);
-    localStorage.setItem("handletitle", temp)
+    localStorage.setItem("handletitle", temp);
     const urldata = BASE_URL + `/get_data/${currentid}/`;
     const { data } = await axios.post(
       urldata,
@@ -150,7 +155,7 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
     );
     dispatch({ type: HANDLE_TTILES, payload: data });
     console.log("response", response);
-    
+
     finalstring = format(finalstring);
     dispatch({
       type: CHAT_SUCCESS,

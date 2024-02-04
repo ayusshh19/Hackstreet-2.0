@@ -7,7 +7,7 @@ import { useAlert } from "react-alert";
 import { CHAT_REQUEST, NEW_CHAT } from "../constants/Chatconstant";
 import Responsivetext from "../components/Responsivetext";
 import { useRef } from "react";
-import './result.css'
+import "./result.css";
 function Resutpage(props) {
   // const copyToClipboard = (text) => {
   //   navigator.clipboard
@@ -32,7 +32,6 @@ function Resutpage(props) {
   } = props.value;
   const alert = useAlert();
 
-
   function format(data) {
     const res = data;
     const codeRegex = /```([\s\S]*?)```/g;
@@ -41,14 +40,14 @@ function Resutpage(props) {
       (_, code) => `<pre>${code}</pre>`
     );
     const replacedText = formattedResponse.replace(
-      /\*\*(.*?)\*\*/g,
-      (_, data) => `<h1>${data}</h1>`
+      /([\s\S]*?):/g,
+      // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
+      (_, data) => `<h6>${data}:</h6>`
     );
-  
+
     console.log(replacedText);
     return replacedText;
   }
-
 
   const { loading, chatdata, currentid, prevchat } = useSelector(
     (state) => state.chat
@@ -117,7 +116,9 @@ function Resutpage(props) {
                         // onClick={() =>
                         //   copyToClipboard(chatdata[0]?.ai_response)
                         // }
-                        dangerouslySetInnerHTML={{ __html: format(data.ai_response) }}
+                        dangerouslySetInnerHTML={{
+                          __html: format(data.ai_response),
+                        }}
                       >
                         {/* {data.ai_response} */}
                       </p>

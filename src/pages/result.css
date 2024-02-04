@@ -4,3 +4,8 @@ pre{
     border-radius: 10px;
     background-color: #4F6F52;
 }
+
+span{
+    font-size: large;
+    /* background-color: white; */
+}
