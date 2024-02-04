@@ -40,8 +40,9 @@ function Resutpage(props) {
       (_, code) => `<pre>${code}</pre>`
     );
     const replacedText = formattedResponse.replace(
-      /\*\*(.*?)\*\*/g,
-      (_, data) => `<h1>${data}</h1>`
+      /([\s\S]*?):/g,
+      // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
+      (_, data) => `<h6>${data}:</h6>`
     );
 
     console.log(replacedText);
