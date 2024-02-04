@@ -128,7 +128,7 @@ const Signup = () => {
           </button>)}
             
           </div>
-          <div class="py-3 flex items-center text-sm text-gray-800 before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600 my-3">
+          {/* <div class="py-3 flex items-center text-sm text-gray-800 before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600 my-3">
             OR
           </div>
           <a
@@ -163,7 +163,7 @@ const Signup = () => {
                 </h1>
               </div>
             </div>
-          </a>
+          </a> */}
           <div className="mt-4 flex items-center w-full text-center">
             <a
               className="text-xs text-gray-500 capitalize text-center w-full"
