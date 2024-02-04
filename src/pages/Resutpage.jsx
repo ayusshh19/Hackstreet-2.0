@@ -98,9 +98,9 @@ function Resutpage(props) {
                         // onClick={() =>
                         //   copyToClipboard(chatdata[0]?.ai_response)
                         // }
-                        // dangerouslySetInnerHTML={{ __html: data.ai_response }}
+                        dangerouslySetInnerHTML={{ __html: data.ai_response }}
                       >
-                        {data.ai_response}
+                        {/* {data.ai_response} */}
                       </p>
                     </div>
                   );

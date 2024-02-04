@@ -29,8 +29,11 @@ function format(data) {
     (_, data) => `<h1>${data}</h1>`
   );
 
-  console.log(replacedText);
-  return replacedText;
+  // console.log(replacedText);
+  // return replacedText;
+  const finalHTML = `<div>${replacedText}</div>`;
+  console.log(finalHTML);
+  return finalHTML;
 }
 
 const get_latest_title = (currentid) => {
@@ -152,7 +155,7 @@ export const sendchat = (userprompt, currentid) => async (dispatch) => {
     );
     dispatch({ type: HANDLE_TTILES, payload: data });
     console.log("response", response);
-    
+
     finalstring = format(finalstring);
     dispatch({
       type: CHAT_SUCCESS,
