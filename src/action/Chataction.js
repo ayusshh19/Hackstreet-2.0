@@ -21,7 +21,7 @@ function format(data) {
   const codeRegex = /```([\s\S]*?)```/g;
   const formattedResponse = res.replace(
     codeRegex,
-    (_, code) => `<pre className="p-4 b-2">${code}</pre>`
+    (_, code) => `<pre className="p-4 border-2">${code}</pre>`
   );
   const replacedText = formattedResponse.replace(
     /\*\*(.*?)\*\*/g,
