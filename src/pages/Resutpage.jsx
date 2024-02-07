@@ -7,6 +7,10 @@ import { useAlert } from "react-alert";
 import { CHAT_REQUEST, NEW_CHAT } from "../constants/Chatconstant";
 import Responsivetext from "../components/Responsivetext";
 import { useRef } from "react";
+import DOMPurify from "dompurify";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
 import "./result.css";
 function Resutpage(props) {
   // const copyToClipboard = (text) => {
@@ -34,19 +38,30 @@ function Resutpage(props) {
 
   function format(data) {
     const res = data;
+    let getnew;
     const codeRegex = /```([\s\S]*?)```/g;
+    let stringWithoutCode = "";
     const formattedResponse = res.replace(
       codeRegex,
       (_, code) => `<pre>${code}</pre>`
     );
-    // const replacedText = formattedResponse.replace(
-    //   /([\s\S]*?):/g,
-    //   // /^(\d+)\.\s*([^:]+):\s*(.*)$/g,
-    //   (_, data) => `<h6>${data}:</h6>`
-    // );
+    const codeMatch = /<pre>(.*?)<\/pre>/s.exec(formattedResponse);
+    if (codeMatch) {
+      const extractedCode = codeMatch[1];
+      stringWithoutCode = formattedResponse.replace(
+        codeMatch[0],
+        "IDIWANTTOREPLACETHIS"
+      );
+      getnew = stringWithoutCode.split("IDIWANTTOREPLACETHIS");
+      // console.log(getnew);
+      // setCodePart(extractedCode);
+    } else {
+      // setCodePart(null);
+      getnew = formattedResponse;
+    }
 
-    console.log(formattedResponse);
-    return formattedResponse;
+    // console.log(formattedResponse);
+    return [getnew, codeMatch];
   }
 
   const { loading, chatdata, currentid, prevchat } = useSelector(
@@ -112,22 +127,49 @@ function Resutpage(props) {
                         {data.user_response}
                       </h1>
                       <p
-                        className="text-sm h-4/5 sm:h-5/6 whitespace-pre-line break-all  w-full"
-                        // onClick={() =>
-                        //   copyToClipboard(chatdata[0]?.ai_response)
-                        // }
-                        dangerouslySetInnerHTML={{
-                          __html: format(data.ai_response),
-                        }}
+                        className="text-sm h-auto mb-5 sm:h-auto whitespace-pre-line break-all  w-full"
+                        // dangerouslySetInnerHTML={{
+                        //   __html: format(data.ai_response)[0][0]
+                        // }}
                       >
-                        {/* {data.ai_response} */}
+                        {Array.isArray(format(data.ai_response)[0])
+                          ? format(data.ai_response)[0][0]
+                          : format(data.ai_response)}
                       </p>
+                      {format(data.ai_response)[1] && (
+                        <SyntaxHighlighter
+                          lineProps={{
+                            style: {
+                              wordBreak: "break-all",
+                              whiteSpace: "pre-wrap",
+                              fontSize: "medium",
+                              width: "90%",
+                              lineHeight: "1.5",
+                              marginBottom: "2",
+                              overflow:"hidden"
+                            },
+                          }}
+                          startingLineNumber={true}
+                          wrapLines={true}
+                          style={a11yDark}
+                        >
+                          {format(data.ai_response)[1]}
+                        </SyntaxHighlighter>
+                      )}
+                      <p
+                        className="text-sm h-auto mt-5 sm:h-auto whitespace-pre-line break-all  w-full adjustpre"
+                        dangerouslySetInnerHTML={{
+                          __html: Array.isArray(format(data.ai_response)[0])
+                            ? format(data.ai_response)[0][1]
+                            : "",
+                        }}
+                      ></p>
                     </div>
                   );
                 }
               })}
             <div className="mb-5">
-              <Responsivetext />
+              <Responsivetext format={format} />
             </div>
             <div ref={rName}></div>
           </div>

@@ -11,7 +11,7 @@ function Responsivetext() {
             {chatdata[0]?.user_response}
           </h1>
           <p
-            className="text-sm h-4/5 sm:h-5/6 relative whitespace-pre-line break-all w-full"
+            className="text-sm h-4/5 sm:h-5/6 relative whitespace-pre-line break-all w-full adjustpre"
             dangerouslySetInnerHTML={{ __html: chatdata[0]?.ai_response }}
           >
             {/* {chatdata[0]?.ai_response} */}
